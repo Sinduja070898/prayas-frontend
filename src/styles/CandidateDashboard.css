@@ -1,0 +1,192 @@
+.candidate-dashboard {
+  max-width: 720px;
+}
+
+.dashboard-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-card-elevated);
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.dashboard-welcome-text {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.dashboard-welcome-text strong {
+  color: var(--text-primary);
+}
+
+.dashboard-status-pill {
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.dashboard-status-pill.pending {
+  background: var(--bg-card);
+  color: var(--text-muted);
+}
+
+.dashboard-status-pill.shortlisted,
+.dashboard-status-pill.done {
+  background: var(--success);
+  color: #fff;
+}
+
+.dashboard-status-pill.rejected {
+  background: var(--danger);
+  color: #fff;
+}
+
+.journey-section {
+  margin-bottom: 1.5rem;
+}
+
+.journey-title {
+  margin: 0 0 1rem 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.journey-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.journey-step-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-page);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.journey-step-node.done {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+
+.journey-step-node.current {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.journey-check {
+  font-size: 0.9rem;
+}
+
+.journey-line {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  margin: 0 4px;
+  max-width: 60px;
+}
+
+.journey-line.done {
+  background: var(--success);
+}
+
+.journey-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.journey-label {
+  max-width: 70px;
+  text-align: center;
+}
+
+.card-rejection .status-desc {
+  color: var(--text-secondary);
+}
+
+.dashboard-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-card-icon {
+  font-size: 1.5rem;
+}
+
+.dashboard-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard-card-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dashboard-card-detail {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.card-assessment-ready {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--primary);
+}
+
+.btn-begin {
+  padding: 0.6rem 1.25rem;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.btn-begin:hover {
+  background: var(--primary-hover);
+  color: #fff;
+}
+
+.card-summary,
+.card-notice {
+  background: var(--bg-card);
+}
+
+.status-desc {
+  margin: 0 0 1rem 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.status-desc.success-msg {
+  color: var(--success);
+  font-weight: 500;
+}

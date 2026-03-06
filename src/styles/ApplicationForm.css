@@ -1,0 +1,164 @@
+.application-form-wrap {
+  max-width: 640px;
+}
+
+.application-progress {
+  margin-bottom: 1.5rem;
+}
+
+.application-progress-bar {
+  height: 6px;
+  background: var(--bg-page);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.application-progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 3px;
+  transition: width 0.2s ease;
+}
+
+.application-progress-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.form-hint {
+  margin: 0 0 1rem 0;
+  font-size: 0.85rem;
+  color: var(--primary);
+}
+
+.form-step-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.option-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.option-buttons label {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.option-buttons label.selected {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.file-upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.file-upload-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-upload-text {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.file-upload-spec {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.form-errors-banner {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(220, 38, 38, 0.15);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius);
+  color: var(--danger);
+  font-size: 0.95rem;
+}
+
+.form-submit-error {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.application-form .form-intro {
+  margin: 0 0 1.25rem 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+}
+
+.form-section h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.file-name {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.form-actions {
+  margin-top: 1.5rem;
+}
+
+.confirmation-box {
+  text-align: center;
+  padding: 2rem;
+}
+
+.confirmation-box h3 {
+  color: var(--success);
+  margin: 0 0 0.5rem 0;
+}
+
+.confirmation-box p {
+  margin: 0;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,64 @@
+.home-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.home-hero {
+  max-width: 500px;
+  text-align: center;
+  padding: 2.5rem;
+}
+
+.home-hero h1 {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+  font-size: 1.75rem;
+}
+
+.home-hero p {
+  margin: 0 0 1.5rem 0;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.home-intro {
+  margin-bottom: 1.5rem;
+}
+
+.home-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.home-section-admin {
+  border-top-color: var(--border);
+}
+
+.home-section-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.home-section-desc {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.home-actions .btn {
+  text-decoration: none;
+}

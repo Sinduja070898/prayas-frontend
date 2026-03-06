@@ -1,0 +1,163 @@
+.admin-mcq-page {
+  max-width: 100%;
+}
+
+.mcq-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.mcq-count {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.btn-add-question {
+  padding: 0.5rem 1rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-add-question:hover {
+  filter: brightness(1.1);
+}
+
+.question-form-card {
+  border: 2px dashed var(--primary);
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+}
+
+.question-form-title {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+}
+
+.option-row.correct {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: var(--success);
+}
+
+.option-row input[type="text"] {
+  flex: 1;
+}
+
+.btn-save-question {
+  margin-top: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-save-question:hover {
+  filter: brightness(1.1);
+}
+
+.questions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.question-item {
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.question-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.question-id {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.question-item-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-edit {
+  padding: 0.35rem 0.75rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-edit:hover {
+  filter: brightness(1.1);
+}
+
+.question-text {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.option-chip {
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+.option-chip.correct {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: var(--success);
+  color: var(--success);
+  font-weight: 500;
+}
+
+.empty-msg-block {
+  margin-top: 1rem;
+}
+
+.empty-msg {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.empty-msg-hint {
+  margin: 0.75rem 0 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  line-height: 1.4;
+}

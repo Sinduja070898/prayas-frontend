@@ -1,0 +1,231 @@
+.admin-dashboard {
+  max-width: 100%;
+}
+
+.admin-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-card {
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.summary-value {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.summary-total .summary-value {
+  color: var(--primary);
+}
+
+.summary-pending .summary-value {
+  color: #eab308;
+}
+
+.summary-shortlisted .summary-value {
+  color: var(--success);
+}
+
+.summary-assessed .summary-value {
+  color: #f59e0b;
+}
+
+.summary-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.summary-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.admin-candidates-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0;
+}
+
+.admin-search-input {
+  padding: 0.5rem 0.75rem 0.5rem 2rem;
+  background: var(--bg-page) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") no-repeat 0.6rem center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  min-width: 220px;
+}
+
+.admin-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-tab {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: var(--bg-card-elevated);
+  color: var(--text-secondary);
+}
+
+.filter-tab:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.filter-tab.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+.filter-tab.shortlisted.active {
+  background: var(--success);
+  color: #fff;
+}
+
+.filter-tab.rejected.active {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-export-csv {
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  background: var(--success);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-export-csv:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.btn-export-csv:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.table-wrap {
+  padding: 0;
+  overflow-x: auto;
+}
+
+.candidates-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.candidates-table th,
+.candidates-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.candidates-table th {
+  background: var(--bg-page);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.candidates-table td {
+  font-size: 0.9rem;
+}
+
+.candidate-name-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.candidate-name-link:hover {
+  color: var(--primary);
+}
+
+.candidate-name {
+  font-weight: 500;
+}
+
+.candidate-email {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.status-dot.status-shortlisted {
+  background: var(--success);
+}
+
+.status-dot.status-pending {
+  background: #eab308;
+}
+
+.status-dot.status-assessed {
+  background: var(--primary);
+}
+
+.status-dot.status-rejected {
+  background: var(--danger);
+}
+
+.candidates-table .btn-sm {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+}
+
+.muted-sm {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+  .admin-summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-summary-cards {
+    grid-template-columns: 1fr;
+  }
+}

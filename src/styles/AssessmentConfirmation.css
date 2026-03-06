@@ -1,0 +1,91 @@
+.confirmation-page {
+  max-width: 520px;
+}
+
+.confirmation-card {
+  text-align: center;
+  padding: 2rem;
+}
+
+.confirmation-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.confirmation-heading {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.confirmation-message {
+  margin: 0 0 1.5rem 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.confirmation-stats {
+  margin-bottom: 1.5rem;
+}
+
+.confirmation-stat-main {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  background: var(--success);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.confirmation-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.confirmation-details div {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.confirmation-details dt {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.confirmation-details dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.confirmation-status-dot {
+  color: var(--success);
+  margin-right: 0.25rem;
+}
+
+.btn-return-dashboard {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+.btn-return-dashboard:hover {
+  background: var(--primary-hover);
+  color: #fff;
+}
