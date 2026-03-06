@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import CandidateLayout from '../components/CandidateLayout';
@@ -53,7 +53,6 @@ export default function ApplicationForm() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [form, setForm] = useState(() => ({ ...INITIAL, email: user?.email || '', fullName: user?.name || '' }));
-  const [loaded, setLoaded] = useState(false);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -70,8 +69,6 @@ export default function ApplicationForm() {
           const existing = getApplicationByCandidateId(user?.id);
           if (existing?.formData) setForm((prev) => ({ ...INITIAL, ...prev, ...existing.formData }));
         }
-      } finally {
-        if (!cancelled) setLoaded(true);
       }
     })();
     return () => { cancelled = true; };

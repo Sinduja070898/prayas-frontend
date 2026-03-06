@@ -66,6 +66,7 @@ export default function Assessment() {
       }
     })();
     return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- run on user id; attempted is set inside effect
   }, [user?.id]);
 
   const [answers, setAnswers] = useState([]);
@@ -76,6 +77,7 @@ export default function Assessment() {
 
   useEffect(() => {
     if (questions.length > 0 && answers.length !== questions.length) setAnswers(Array(questions.length).fill(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only init answers when question set changes, not when answers change
   }, [questions.length]);
 
   const submitAssessment = useCallback(async () => {
