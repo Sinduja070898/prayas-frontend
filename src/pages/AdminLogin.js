@@ -20,12 +20,14 @@ export default function AdminLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const emailTrimmed = (email || '').trim().toLowerCase();
+    const passwordTrimmed = (password || '').trim();
     const err = {};
-    if (!validateEmail(email)) err.email = 'Enter a valid email';
-    if (!validatePassword(password)) err.password = 'Password must be at least 6 characters';
+    if (!validateEmail(emailTrimmed)) err.email = 'Enter a valid email';
+    if (!validatePassword(passwordTrimmed)) err.password = 'Password must be at least 6 characters';
     setErrors(err);
     if (Object.keys(err).length > 0) return;
-    const result = await login(email, password, 'admin');
+    const result = await login(emailTrimmed, passwordTrimmed, 'admin');
     if (result.success) {
       navigate(from, { replace: true });
     } else {

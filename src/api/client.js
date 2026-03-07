@@ -1,9 +1,9 @@
 const BASE =
-  typeof process.env.REACT_APP_API_URL !== 'undefined'
-    ? process.env.REACT_APP_API_URL
-    : process.env.NODE_ENV === 'development'
-      ? 'http://localhost:5001'
-      : '';
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:5001'
+    : (typeof process.env.REACT_APP_API_URL !== 'undefined' && process.env.REACT_APP_API_URL !== ''
+      ? process.env.REACT_APP_API_URL
+      : 'https://prayas-backend-vhll.onrender.com');
 
 function getToken() {
   return localStorage.getItem('prayas_token');
@@ -28,10 +28,15 @@ async function handleRes(r) {
 }
 
 export async function apiLogin(email, password, role = 'candidate') {
+  const payload = {
+    email: (email || '').trim().toLowerCase(),
+    password: (password || '').trim(),
+    role: role || 'candidate',
+  };
   const r = await fetch(`${BASE}/api/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password, role }),
+    body: JSON.stringify(payload),
   });
   const data = await r.json().catch(() => ({}));
   if (!r.ok) {
