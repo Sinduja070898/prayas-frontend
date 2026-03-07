@@ -25,22 +25,19 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password, role = 'candidate') => {
     if (role === 'admin') {
-      // Admin: validate against stored admins (no self-registration)
       try {
-        const { getAdminByEmail } = require('../utils/mockStore');
-        const admin = getAdminByEmail(email);
-        if (!admin) {
-          return { success: false, error: 'No admin account found with this email.' };
-        }
-        const mockToken = 'mock-jwt-admin-' + Date.now();
-        const mockUser = { id: admin.id, email, role: 'admin', name: admin.name || email.split('@')[0] };
-        setToken(mockToken);
-        setUser(mockUser);
-        localStorage.setItem(TOKEN_KEY, mockToken);
-        localStorage.setItem(USER_KEY, JSON.stringify(mockUser));
+        const data = await require('../api/client').apiLogin(email, password, 'admin');
+        const t = data.token;
+        const u = data.user || {};
+        const frontUser = { id: u.id || u._id, email: u.email, name: u.name || email.split('@')[0], role: 'admin' };
+        setToken(t);
+        setUser(frontUser);
+        localStorage.setItem(TOKEN_KEY, t);
+        localStorage.setItem(USER_KEY, JSON.stringify(frontUser));
         return { success: true };
-      } catch (_) {
-        return { success: false, error: 'Login failed. Try again.' };
+      } catch (apiErr) {
+        const msg = apiErr?.message || apiErr?.error || 'Login failed. Try again.';
+        return { success: false, error: msg };
       }
     }
     // Candidate login: call API first; fall back to local store if API unreachable

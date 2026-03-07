@@ -18,14 +18,14 @@ export default function AdminLogin() {
     if (isAuthenticated && user?.role === 'admin') navigate(from, { replace: true });
   }, [isAuthenticated, user, navigate, from]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const err = {};
     if (!validateEmail(email)) err.email = 'Enter a valid email';
     if (!validatePassword(password)) err.password = 'Password must be at least 6 characters';
     setErrors(err);
     if (Object.keys(err).length > 0) return;
-    const result = login(email, password, 'admin');
+    const result = await login(email, password, 'admin');
     if (result.success) {
       navigate(from, { replace: true });
     } else {
