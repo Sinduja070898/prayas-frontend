@@ -58,7 +58,7 @@ export default function AdminLogin() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@prayas.in"
+                placeholder="admin@gmail.com"
                 autoComplete="email"
               />
               {errors.email && <div className="form-error">{errors.email}</div>}

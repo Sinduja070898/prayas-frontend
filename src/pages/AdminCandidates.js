@@ -61,6 +61,10 @@ export default function AdminCandidates() {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
+    setFilter(urlFilter);
+  }, [urlFilter]);
+
+  useEffect(() => {
     let cancelled = false;
     async function load() {
       setLoading(true);
@@ -84,10 +88,6 @@ export default function AdminCandidates() {
     load();
     return () => { cancelled = true; };
   }, []);
-
-  useEffect(() => {
-    setFilter(urlFilter);
-  }, [urlFilter]);
 
   const list = useMemo(() => {
     if (useApi) {
