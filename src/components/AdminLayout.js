@@ -102,20 +102,22 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
         <div className="admin-brand">Prayas Admin</div>
         <nav className="admin-flow">
           <span className="admin-flow-label">Admin Flow • 5 Screens</span>
-          <div className="admin-flow-steps">
-            {STEPS.filter((s) => {
-              // Remove Admin Login tab when logged in
-              return !(s.num === 1 && isLoggedIn);
-            }).map((s) => (
-              <Link
-                key={s.num}
-                to={s.path}
-                className={`admin-flow-step ${s.num === activeStep ? 'active' : ''}`}
-              >
-                {s.label}
-              </Link>
-            ))}
-          </div>
+          {isLoggedIn && (
+            <div className="admin-flow-steps">
+              {STEPS.filter((s) => {
+                // Remove Admin Login tab when logged in
+                return !(s.num === 1 && isLoggedIn);
+              }).map((s) => (
+                <Link
+                  key={s.num}
+                  to={s.path}
+                  className={`admin-flow-step ${s.num === activeStep ? 'active' : ''}`}
+                >
+                  {s.label}
+                </Link>
+              ))}
+            </div>
+          )}
         </nav>
         <div className="admin-badge-wrapper" ref={dropdownRef}>
           {isLoggedIn ? (

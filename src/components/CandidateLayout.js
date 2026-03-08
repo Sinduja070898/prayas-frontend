@@ -100,20 +100,22 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
         <Link to="/" className="candidate-brand">Prayas</Link>
         <nav className="candidate-flow">
           <span className="candidate-flow-label">CANDIDATE FLOW • 5 SCREENS</span>
-          <div className="candidate-flow-steps">
-            {CANDIDATE_STEPS.filter((s) => {
-              // Remove Login/Register tab when logged in
-              return !(s.num === 1 && user?.role === 'candidate');
-            }).map((s) => (
-              <Link
-                key={s.num}
-                to={s.path}
-                className={`candidate-flow-step ${s.num === activeStep ? 'active' : ''}`}
-              >
-                {s.label}
-              </Link>
-            ))}
-          </div>
+          {user?.role === 'candidate' && (
+            <div className="candidate-flow-steps">
+              {CANDIDATE_STEPS.filter((s) => {
+                // Remove Login/Register tab when logged in
+                return !(s.num === 1 && user?.role === 'candidate');
+              }).map((s) => (
+                <Link
+                  key={s.num}
+                  to={s.path}
+                  className={`candidate-flow-step ${s.num === activeStep ? 'active' : ''}`}
+                >
+                  {s.label}
+                </Link>
+              ))}
+            </div>
+          )}
         </nav>
         <div className="candidate-badge-wrapper" ref={dropdownRef}>
           {user?.role === 'candidate' ? (
@@ -149,7 +151,7 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
           )}
         </div>
       </header>
-      <main className="candidate-main">
+      <main className={`candidate-main ${title ? 'candidate-main-with-header' : 'candidate-main-centered'}`}>
         {title && (
           <div className="candidate-page-header">
             <span className="candidate-page-num">{String(activeStep).padStart(2, '0')}</span>
@@ -159,7 +161,9 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
             </div>
           </div>
         )}
-        {children}
+        <div className={title ? 'candidate-content' : 'candidate-content-centered'}>
+          {children}
+        </div>
       </main>
     </div>
   );

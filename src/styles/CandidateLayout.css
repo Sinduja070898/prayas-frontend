@@ -149,6 +149,29 @@
   max-width: 900px;
   margin: 0 auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 52px);
+}
+
+.candidate-main-centered {
+  justify-content: center;
+  align-items: center;
+}
+
+.candidate-main-with-header {
+  justify-content: flex-start;
+}
+
+.candidate-content {
+  width: 100%;
+}
+
+.candidate-content-centered {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .candidate-page-header {
