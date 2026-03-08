@@ -181,14 +181,6 @@ export default function CandidateAuth() {
               <button type="submit" className="btn btn-signin-prayas">Create Account</button>
             </form>
           )}
-          {mode === 'signin' && (
-            <>
-              <div className="candidate-auth-divider">or continue with</div>
-              <button type="button" className="btn btn-google" disabled>
-                <span className="btn-google-icon">G</span> Continue with Google
-              </button>
-            </>
-          )}
           <p className="candidate-auth-switch">
             {mode === 'signin' ? (
               <>Don&apos;t have an account? <button type="button" className="link-button" onClick={() => setMode('create')}>Create one →</button></>

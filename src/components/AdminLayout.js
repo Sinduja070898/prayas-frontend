@@ -88,6 +88,7 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
   };
 
   const handleLogoutClick = () => {
+    if (!isLoggedIn) return;
     setShowLogoutModal(true);
     setShowDropdown(false);
   };
@@ -104,7 +105,7 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
 
   return (
     <div className="admin-layout">
-      {showLogoutModal && (
+      {showLogoutModal && isLoggedIn && (
         <div className="admin-modal-overlay" onClick={() => setShowLogoutModal(false)}>
           <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
             <h3 className="admin-modal-title">Confirm Logout</h3>
@@ -187,54 +188,56 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
       </header>
 
       <div className="admin-body">
-        <aside className="admin-sidebar">
-          <div className="admin-sidebar-brand">
-            <span className="admin-sidebar-logo">Prayas</span>
-            <span className="admin-sidebar-console">ADMIN CONSOLE</span>
-          </div>
-          <nav className="admin-sidebar-nav">
-            <div className="admin-nav-section">
-              <span className="admin-nav-section-title">OVERVIEW</span>
-              <Link to="/admin" className={`admin-nav-item ${activeStep === 2 ? 'active' : ''}`}>
-                <span className="admin-nav-icon">📊</span> Dashboard
-              </Link>
+        {isLoggedIn && (
+          <aside className="admin-sidebar">
+            <div className="admin-sidebar-brand">
+              <span className="admin-sidebar-logo">Prayas</span>
+              <span className="admin-sidebar-console">ADMIN CONSOLE</span>
             </div>
-            <div className="admin-nav-section">
-              <span className="admin-nav-section-title">CANDIDATES</span>
-              <Link to="/admin" className={`admin-nav-item ${location.pathname === '/admin' && !location.search ? 'active' : ''}`}>
-                <span className="admin-nav-icon">👥</span> All Candidates
-                <span className="admin-nav-badge">{counts.total}</span>
-              </Link>
-              <Link to="/admin?filter=pending" className="admin-nav-item">
-                <span className="admin-nav-icon">⏳</span> Pending Review
-              </Link>
-              <Link to="/admin?filter=shortlisted" className="admin-nav-item">
-                <span className="admin-nav-icon admin-nav-icon-green">✓</span> Shortlisted
-              </Link>
-            </div>
-            <div className="admin-nav-section">
-              <span className="admin-nav-section-title">ASSESSMENT</span>
-              <Link to="/admin/questions" className={`admin-nav-item ${activeStep === 3 ? 'active' : ''}`}>
-                <span className="admin-nav-icon">?</span> MCQ Manager
-              </Link>
-              <Link to="/admin/results" className={`admin-nav-item ${activeStep === 4 ? 'active' : ''}`}>
-                <span className="admin-nav-icon">📈</span> Results
-              </Link>
-              <Link to="/admin/results" className="admin-nav-item">
-                <span className="admin-nav-icon">↓</span> Export CSV
-              </Link>
-            </div>
-            <div className="admin-nav-section">
-              <span className="admin-nav-section-title">ACCOUNT</span>
-              <Link to="/admin" className="admin-nav-item">
-                <span className="admin-nav-icon">⚙</span> Settings
-              </Link>
-              <button type="button" className="admin-nav-item admin-nav-logout" onClick={handleLogoutClick}>
-                <span className="admin-nav-icon">🚪</span> Logout
-              </button>
-            </div>
-          </nav>
-        </aside>
+            <nav className="admin-sidebar-nav">
+              <div className="admin-nav-section">
+                <span className="admin-nav-section-title">OVERVIEW</span>
+                <Link to="/admin" className={`admin-nav-item ${activeStep === 2 ? 'active' : ''}`}>
+                  <span className="admin-nav-icon">📊</span> Dashboard
+                </Link>
+              </div>
+              <div className="admin-nav-section">
+                <span className="admin-nav-section-title">CANDIDATES</span>
+                <Link to="/admin" className={`admin-nav-item ${location.pathname === '/admin' && !location.search ? 'active' : ''}`}>
+                  <span className="admin-nav-icon">👥</span> All Candidates
+                  <span className="admin-nav-badge">{counts.total}</span>
+                </Link>
+                <Link to="/admin?filter=pending" className="admin-nav-item">
+                  <span className="admin-nav-icon">⏳</span> Pending Review
+                </Link>
+                <Link to="/admin?filter=shortlisted" className="admin-nav-item">
+                  <span className="admin-nav-icon admin-nav-icon-green">✓</span> Shortlisted
+                </Link>
+              </div>
+              <div className="admin-nav-section">
+                <span className="admin-nav-section-title">ASSESSMENT</span>
+                <Link to="/admin/questions" className={`admin-nav-item ${activeStep === 3 ? 'active' : ''}`}>
+                  <span className="admin-nav-icon">?</span> MCQ Manager
+                </Link>
+                <Link to="/admin/results" className={`admin-nav-item ${activeStep === 4 ? 'active' : ''}`}>
+                  <span className="admin-nav-icon">📈</span> Results
+                </Link>
+                <Link to="/admin/results" className="admin-nav-item">
+                  <span className="admin-nav-icon">↓</span> Export CSV
+                </Link>
+              </div>
+              <div className="admin-nav-section">
+                <span className="admin-nav-section-title">ACCOUNT</span>
+                <Link to="/admin" className="admin-nav-item">
+                  <span className="admin-nav-icon">⚙</span> Settings
+                </Link>
+                <button type="button" className="admin-nav-item admin-nav-logout" onClick={handleLogoutClick}>
+                  <span className="admin-nav-icon">🚪</span> Logout
+                </button>
+              </div>
+            </nav>
+          </aside>
+        )}
 
         <main className={`admin-main ${title ? 'admin-main-with-header' : 'admin-main-centered'}`}>
           {title && (

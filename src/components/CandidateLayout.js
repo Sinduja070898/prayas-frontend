@@ -70,6 +70,12 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
   const candidateName = user?.name || formData.fullName || 'Candidate';
   const candidateEmail = user?.email || formData.email || '—';
 
+  // Calculate visible tabs count
+  const visibleSteps = user?.role === 'candidate'
+    ? CANDIDATE_STEPS.filter((s) => !(s.num === 1 && user?.role === 'candidate'))
+    : CANDIDATE_STEPS;
+  const screenCount = visibleSteps.length;
+
   return (
     <div className="candidate-layout">
       {showLogoutModal && (
@@ -99,7 +105,7 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
       <header className="candidate-topbar">
         <Link to="/" className="candidate-brand">Prayas</Link>
         <nav className="candidate-flow">
-          <span className="candidate-flow-label">CANDIDATE FLOW • 5 SCREENS</span>
+          <span className="candidate-flow-label">CANDIDATE FLOW • {screenCount} SCREENS</span>
           {user?.role === 'candidate' && (
             <div className="candidate-flow-steps">
               {CANDIDATE_STEPS.filter((s) => {
