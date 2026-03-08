@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { apiApplicationsList, apiAssessmentsList } from '../api/client';
 import { getCandidates } from '../utils/mockStore';
 import { getApplications, getAssessmentResults } from '../utils/mockStore';
 import { APPLICATION_STATUS } from '../utils/constants';
@@ -14,7 +15,7 @@ const STEPS = [
   { num: 5, label: 'Results & Export', path: '/admin/results' },
 ];
 
-function getCounts() {
+function getCountsMem() {
   const candidates = getCandidates();
   const applications = getApplications();
   const results = getAssessmentResults();
@@ -34,7 +35,36 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
   const navigate = useNavigate();
   const location = useLocation();
   const isLoggedIn = user?.role === 'admin';
-  const counts = isLoggedIn ? getCounts() : { total: 0, pending: 0, shortlisted: 0, assessed: 0 };
+  const [counts, setCounts] = useState({ total: 0, pending: 0, shortlisted: 0, assessed: 0 });
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setCounts({ total: 0, pending: 0, shortlisted: 0, assessed: 0 });
+      return;
+    }
+    let cancelled = false;
+    async function load() {
+      try {
+        const [appRes, assRes] = await Promise.all([apiApplicationsList(), apiAssessmentsList()]);
+        if (!cancelled) {
+          const apps = appRes.applications || [];
+          const results = assRes.assessments || [];
+          let pending = 0;
+          let shortlisted = 0;
+          apps.forEach((app) => {
+            const status = app.status || '';
+            if (status === APPLICATION_STATUS.APPLICATION_SUBMITTED || status === APPLICATION_STATUS.REGISTERED || status === 'Application Submitted' || status === 'Registered') pending++;
+            else if ([APPLICATION_STATUS.SHORTLISTED, APPLICATION_STATUS.ASSESSMENT_PENDING, APPLICATION_STATUS.ASSESSMENT_SUBMITTED, 'Shortlisted', 'Assessment Pending', 'Assessment Submitted'].includes(status)) shortlisted++;
+          });
+          setCounts({ total: apps.length, pending, shortlisted, assessed: results.length });
+        }
+      } catch (_) {
+        if (!cancelled) setCounts(getCountsMem());
+      }
+    }
+    load();
+    return () => { cancelled = true; };
+  }, [isLoggedIn]);
 
   const handleLogout = () => {
     logout();
