@@ -1,5 +1,7 @@
 .candidate-auth-page {
   max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .candidate-auth-card {

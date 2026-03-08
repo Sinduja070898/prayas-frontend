@@ -165,6 +165,8 @@
 
 .candidate-content {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .candidate-content-centered {
