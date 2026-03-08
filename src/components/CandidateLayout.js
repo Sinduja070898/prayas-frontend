@@ -101,25 +101,18 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
         <nav className="candidate-flow">
           <span className="candidate-flow-label">CANDIDATE FLOW • 5 SCREENS</span>
           <div className="candidate-flow-steps">
-            {CANDIDATE_STEPS.map((s) => {
-              // Show "Logout" instead of "Login / Register" when logged in
-              const isLogout = s.num === 1 && user?.role === 'candidate';
-              const label = isLogout ? 'Logout' : s.label;
-              const handleClick = isLogout ? (e) => {
-                e.preventDefault();
-                handleLogoutClick();
-              } : undefined;
-              return (
-                <Link
-                  key={s.num}
-                  to={s.path}
-                  onClick={handleClick}
-                  className={`candidate-flow-step ${s.num === activeStep ? 'active' : ''}`}
-                >
-                  {label}
-                </Link>
-              );
-            })}
+            {CANDIDATE_STEPS.filter((s) => {
+              // Remove Login/Register tab when logged in
+              return !(s.num === 1 && user?.role === 'candidate');
+            }).map((s) => (
+              <Link
+                key={s.num}
+                to={s.path}
+                className={`candidate-flow-step ${s.num === activeStep ? 'active' : ''}`}
+              >
+                {s.label}
+              </Link>
+            ))}
           </div>
         </nav>
         <div className="candidate-badge-wrapper" ref={dropdownRef}>

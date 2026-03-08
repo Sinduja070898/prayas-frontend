@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { apiApplicationsList, apiAssessmentsList } from '../api/client';
@@ -36,6 +36,8 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
   const location = useLocation();
   const isLoggedIn = user?.role === 'admin';
   const [counts, setCounts] = useState({ total: 0, pending: 0, shortlisted: 0, assessed: 0 });
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -66,10 +68,33 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
     return () => { cancelled = true; };
   }, [isLoggedIn]);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+    if (showDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showDropdown]);
+
   const handleLogout = () => {
     logout();
     navigate('/admin/login');
+    setShowDropdown(false);
   };
+
+  const handleAdminClick = (e) => {
+    e.stopPropagation();
+    if (isLoggedIn) {
+      setShowDropdown(!showDropdown);
+    }
+  };
+
+  const adminName = user?.name || 'Admin';
+  const adminEmail = user?.email || '—';
 
   return (
     <div className="admin-layout">
@@ -78,29 +103,54 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
         <nav className="admin-flow">
           <span className="admin-flow-label">Admin Flow • 5 Screens</span>
           <div className="admin-flow-steps">
-            {STEPS.map((s) => {
-              // Show "Logout" instead of "Admin Login" when logged in
-              const isLogout = s.num === 1 && isLoggedIn;
-              const label = isLogout ? 'Logout' : s.label;
-              const handleClick = isLogout ? (e) => {
-                e.preventDefault();
-                handleLogout();
-              } : undefined;
-              return (
-                <Link
-                  key={s.num}
-                  to={s.path}
-                  onClick={handleClick}
-                  className={`admin-flow-step ${s.num === activeStep ? 'active' : ''}`}
-                >
-                  {label}
-                </Link>
-              );
-            })}
+            {STEPS.filter((s) => {
+              // Remove Admin Login tab when logged in
+              return !(s.num === 1 && isLoggedIn);
+            }).map((s) => (
+              <Link
+                key={s.num}
+                to={s.path}
+                className={`admin-flow-step ${s.num === activeStep ? 'active' : ''}`}
+              >
+                {s.label}
+              </Link>
+            ))}
           </div>
         </nav>
-        <div className="admin-badge">
-          <span className="admin-badge-icon">🛡</span> Admin
+        <div className="admin-badge-wrapper" ref={dropdownRef}>
+          {isLoggedIn ? (
+            <>
+              <div
+                className="admin-badge"
+                onClick={handleAdminClick}
+                onKeyDown={(e) => e.key === 'Enter' && handleAdminClick(e)}
+                role="button"
+                tabIndex={0}
+              >
+                <span className="admin-badge-icon">🛡</span> Admin
+              </div>
+              {showDropdown && (
+                <div className="admin-dropdown">
+                  <div className="admin-dropdown-header">
+                    <div className="admin-dropdown-name">{adminName}</div>
+                    <div className="admin-dropdown-email">{adminEmail}</div>
+                  </div>
+                  <div className="admin-dropdown-divider"></div>
+                  <button
+                    type="button"
+                    className="admin-dropdown-logout"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="admin-badge">
+              <span className="admin-badge-icon">🛡</span> Admin
+            </div>
+          )}
         </div>
       </header>
 
