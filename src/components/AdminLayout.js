@@ -78,15 +78,25 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
         <nav className="admin-flow">
           <span className="admin-flow-label">Admin Flow • 5 Screens</span>
           <div className="admin-flow-steps">
-            {STEPS.map((s) => (
-              <Link
-                key={s.num}
-                to={s.path}
-                className={`admin-flow-step ${s.num === activeStep ? 'active' : ''}`}
-              >
-                {s.num} {s.label}
-              </Link>
-            ))}
+            {STEPS.map((s) => {
+              // Show "Logout" instead of "Admin Login" when logged in
+              const isLogout = s.num === 1 && isLoggedIn;
+              const label = isLogout ? 'Logout' : s.label;
+              const handleClick = isLogout ? (e) => {
+                e.preventDefault();
+                handleLogout();
+              } : undefined;
+              return (
+                <Link
+                  key={s.num}
+                  to={s.path}
+                  onClick={handleClick}
+                  className={`admin-flow-step ${s.num === activeStep ? 'active' : ''}`}
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </div>
         </nav>
         <div className="admin-badge">

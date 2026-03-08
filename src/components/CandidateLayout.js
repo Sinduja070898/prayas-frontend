@@ -78,16 +78,16 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
             <h3 className="candidate-modal-title">Confirm Logout</h3>
             <p className="candidate-modal-message">Are you sure you want to logout?</p>
             <div className="candidate-modal-actions">
-              <button 
+              <button
                 type="button"
-                className="candidate-modal-btn candidate-modal-btn-cancel" 
+                className="candidate-modal-btn candidate-modal-btn-cancel"
                 onClick={() => setShowLogoutModal(false)}
               >
                 No
               </button>
-              <button 
+              <button
                 type="button"
-                className="candidate-modal-btn candidate-modal-btn-confirm" 
+                className="candidate-modal-btn candidate-modal-btn-confirm"
                 onClick={confirmLogout}
               >
                 Yes
@@ -105,9 +105,9 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
               // Show "Logout" instead of "Login / Register" when logged in
               const isLogout = s.num === 1 && user?.role === 'candidate';
               const label = isLogout ? 'Logout' : s.label;
-              const handleClick = isLogout ? (e) => { 
-                e.preventDefault(); 
-                handleLogoutClick(); 
+              const handleClick = isLogout ? (e) => {
+                e.preventDefault();
+                handleLogoutClick();
               } : undefined;
               return (
                 <Link
@@ -125,11 +125,11 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
         <div className="candidate-badge-wrapper" ref={dropdownRef}>
           {user?.role === 'candidate' ? (
             <>
-              <div 
-                className="candidate-badge" 
-                onClick={handleCandidateClick} 
-                onKeyDown={(e) => e.key === 'Enter' && handleCandidateClick(e)} 
-                role="button" 
+              <div
+                className="candidate-badge"
+                onClick={handleCandidateClick}
+                onKeyDown={(e) => e.key === 'Enter' && handleCandidateClick(e)}
+                role="button"
                 tabIndex={0}
               >
                 <span className="candidate-badge-icon">👤</span> Candidate
@@ -141,9 +141,9 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
                     <div className="candidate-dropdown-email">{candidateEmail}</div>
                   </div>
                   <div className="candidate-dropdown-divider"></div>
-                  <button 
+                  <button
                     type="button"
-                    className="candidate-dropdown-logout" 
+                    className="candidate-dropdown-logout"
                     onClick={handleLogoutClick}
                   >
                     Logout
