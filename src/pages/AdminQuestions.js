@@ -140,7 +140,7 @@ export default function AdminQuestions() {
   };
 
   return (
-    <AdminLayout activeStep={4} title="MCQ Manager" subtitle="Create, view and manage assessment questions.">
+    <AdminLayout activeStep={3} title="MCQ Manager" subtitle="Create, view and manage assessment questions.">
       <div className="admin-mcq-page">
         <div className="admin-url-bar">
           <div className="admin-url-dots"><span className="red" /><span className="yellow" /><span className="green" /></div>

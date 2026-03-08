@@ -10,9 +10,8 @@ import '../styles/AdminLayout.css';
 const STEPS = [
   { num: 1, label: 'Admin Login', path: '/admin/login' },
   { num: 2, label: 'Dashboard', path: '/admin' },
-  { num: 3, label: 'Candidate Detail', path: '/admin' },
-  { num: 4, label: 'MCQ Manager', path: '/admin/questions' },
-  { num: 5, label: 'Results & Export', path: '/admin/results' },
+  { num: 3, label: 'MCQ Manager', path: '/admin/questions' },
+  { num: 4, label: 'Results & Export', path: '/admin/results' },
 ];
 
 function getCountsMem() {
@@ -37,6 +36,7 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
   const isLoggedIn = user?.role === 'admin';
   const [counts, setCounts] = useState({ total: 0, pending: 0, shortlisted: 0, assessed: 0 });
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -80,17 +80,22 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
     }
   }, [showDropdown]);
 
-  const handleLogout = () => {
+  const confirmLogout = () => {
     logout();
     navigate('/admin/login');
+    setShowDropdown(false);
+    setShowLogoutModal(false);
+  };
+
+  const handleLogoutClick = () => {
+    setShowLogoutModal(true);
     setShowDropdown(false);
   };
 
   const handleAdminClick = (e) => {
-    e.preventDefault();
     e.stopPropagation();
     if (isLoggedIn) {
-      setShowDropdown((prev) => !prev);
+      setShowDropdown(!showDropdown);
     }
   };
 
@@ -99,10 +104,34 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
 
   return (
     <div className="admin-layout">
+      {showLogoutModal && (
+        <div className="admin-modal-overlay" onClick={() => setShowLogoutModal(false)}>
+          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+            <h3 className="admin-modal-title">Confirm Logout</h3>
+            <p className="admin-modal-message">Are you sure you want to logout?</p>
+            <div className="admin-modal-actions">
+              <button
+                type="button"
+                className="admin-modal-btn admin-modal-btn-cancel"
+                onClick={() => setShowLogoutModal(false)}
+              >
+                No
+              </button>
+              <button
+                type="button"
+                className="admin-modal-btn admin-modal-btn-confirm"
+                onClick={confirmLogout}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <header className="admin-topbar">
         <div className="admin-brand">Prayas Admin</div>
         <nav className="admin-flow">
-          <span className="admin-flow-label">Admin Flow • 5 Screens</span>
+          <span className="admin-flow-label">Admin Flow • 4 Screens</span>
           {isLoggedIn && (
             <div className="admin-flow-steps">
               {STEPS.filter((s) => {
@@ -142,7 +171,7 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
                   <button
                     type="button"
                     className="admin-dropdown-logout"
-                    onClick={handleLogout}
+                    onClick={handleLogoutClick}
                   >
                     Logout
                   </button>
@@ -185,10 +214,10 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
             </div>
             <div className="admin-nav-section">
               <span className="admin-nav-section-title">ASSESSMENT</span>
-              <Link to="/admin/questions" className={`admin-nav-item ${activeStep === 4 ? 'active' : ''}`}>
+              <Link to="/admin/questions" className={`admin-nav-item ${activeStep === 3 ? 'active' : ''}`}>
                 <span className="admin-nav-icon">?</span> MCQ Manager
               </Link>
-              <Link to="/admin/results" className={`admin-nav-item ${activeStep === 5 ? 'active' : ''}`}>
+              <Link to="/admin/results" className={`admin-nav-item ${activeStep === 4 ? 'active' : ''}`}>
                 <span className="admin-nav-icon">📈</span> Results
               </Link>
               <Link to="/admin/results" className="admin-nav-item">
@@ -200,7 +229,7 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
               <Link to="/admin" className="admin-nav-item">
                 <span className="admin-nav-icon">⚙</span> Settings
               </Link>
-              <button type="button" className="admin-nav-item admin-nav-logout" onClick={handleLogout}>
+              <button type="button" className="admin-nav-item admin-nav-logout" onClick={handleLogoutClick}>
                 <span className="admin-nav-icon">🚪</span> Logout
               </button>
             </div>

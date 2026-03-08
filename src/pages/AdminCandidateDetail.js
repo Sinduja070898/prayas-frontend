@@ -90,7 +90,7 @@ export default function AdminCandidateDetail() {
 
   if (loading) {
     return (
-      <AdminLayout activeStep={3} title="Candidate Detail">
+      <AdminLayout activeStep={2} title="Candidate Detail">
         <p>Loading…</p>
       </AdminLayout>
     );
@@ -98,7 +98,7 @@ export default function AdminCandidateDetail() {
 
   if (!application) {
     return (
-      <AdminLayout activeStep={3} title="Candidate Detail">
+      <AdminLayout activeStep={2} title="Candidate Detail">
         <p>Application not found.</p>
         <Link to="/admin">← Back to Candidates</Link>
       </AdminLayout>
@@ -106,7 +106,7 @@ export default function AdminCandidateDetail() {
   }
 
   return (
-    <AdminLayout activeStep={3} title="Candidate Detail" subtitle="Full application view + status controls.">
+    <AdminLayout activeStep={2} title="Candidate Detail" subtitle="Full application view + status controls.">
       <div className="admin-candidate-detail">
         <div className="admin-url-bar">
           <div className="admin-url-dots"><span className="red" /><span className="yellow" /><span className="green" /></div>

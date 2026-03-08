@@ -1,5 +1,4 @@
 .admin-dashboard {
-  width: 100%;
   max-width: 100%;
 }
 
@@ -135,13 +134,11 @@
 .table-wrap {
   padding: 0;
   overflow-x: auto;
-  width: 100%;
 }
 
 .candidates-table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: auto;
 }
 
 .candidates-table th,
