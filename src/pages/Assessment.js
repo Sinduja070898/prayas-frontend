@@ -144,7 +144,7 @@ export default function Assessment() {
             Can’t find your application. <Link to="/application">Submit again</Link> and ask admin to shortlist you.
           </p>
         )}
-        <Link to="/dashboard" className="btn btn-primary" style={{ marginTop: '1rem' }}>Back to Dashboard</Link>
+        <Link to="/dashboard" className="btn btn-primary">Back to Dashboard</Link>
       </div>
     );
   }

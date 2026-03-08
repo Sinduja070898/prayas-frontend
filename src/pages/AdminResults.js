@@ -79,7 +79,7 @@ export default function AdminResults() {
   };
 
   return (
-    <AdminLayout activeStep={4} title="Results & Export" subtitle="Assessment scores, rankings, CSV download.">
+      <AdminLayout activeStep={4} title="Results & Export" subtitle="Assessment scores, rankings, CSV download.">
       <div className="admin-results-page">
         <div className="admin-url-bar">
           <div className="admin-url-dots"><span className="red" /><span className="yellow" /><span className="green" /></div>
