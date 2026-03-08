@@ -87,9 +87,10 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
   };
 
   const handleAdminClick = (e) => {
+    e.preventDefault();
     e.stopPropagation();
     if (isLoggedIn) {
-      setShowDropdown(!showDropdown);
+      setShowDropdown((prev) => !prev);
     }
   };
 
