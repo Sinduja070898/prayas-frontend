@@ -36,7 +36,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <AdminLayout activeStep={1}>
+    <AdminLayout activeStep={1} title="Admin Login" subtitle="Secure admin-only entry point.">
       <div className="admin-login-page">
         <div className="admin-url-bar">
           <div className="admin-url-dots">
@@ -45,8 +45,6 @@ export default function AdminLogin() {
           <span>prayas.in/admin/login</span>
         </div>
         <div className="admin-login-card card">
-          <h2 className="admin-login-screen-title">01 Admin Login</h2>
-          <p className="admin-login-subtitle">Secure admin-only entry point.</p>
           <div className="admin-login-portal-title">Prayas Administration Portal</div>
           <div className="admin-access-badge">
             <span className="admin-access-icon">🛡</span> Admin Access Only

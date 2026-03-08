@@ -191,7 +191,6 @@
   align-items: flex-start;
   gap: 1rem;
   max-width: 900px;
-  width: 100%;
 }
 
 .candidate-page-num {

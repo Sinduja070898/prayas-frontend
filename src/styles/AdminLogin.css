@@ -1,5 +1,7 @@
 .admin-login-page {
   max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .admin-login-card {

@@ -206,17 +206,21 @@ export default function AdminLayout({ children, activeStep = 1, title, subtitle 
           </nav>
         </aside>
 
-        <main className="admin-main">
+        <main className={`admin-main ${title ? 'admin-main-with-header' : 'admin-main-centered'}`}>
           {title && (
-            <div className="admin-page-header">
-              <span className="admin-page-num">{String(activeStep).padStart(2, '0')}</span>
-              <div>
-                <h1 className="admin-page-title">{title}</h1>
-                {subtitle && <p className="admin-page-subtitle">{subtitle}</p>}
+            <div className="admin-header-wrapper">
+              <div className="admin-page-header">
+                <span className="admin-page-num">{String(activeStep).padStart(2, '0')}</span>
+                <div>
+                  <h1 className="admin-page-title">{title}</h1>
+                  {subtitle && <p className="admin-page-subtitle">{subtitle}</p>}
+                </div>
               </div>
             </div>
           )}
-          {children}
+          <div className={title ? 'admin-content' : 'admin-content-centered'}>
+            {children}
+          </div>
         </main>
       </div>
     </div>
