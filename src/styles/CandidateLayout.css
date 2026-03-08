@@ -163,6 +163,13 @@
   justify-content: flex-start;
 }
 
+.candidate-header-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
 .candidate-content {
   width: 100%;
   display: flex;
@@ -180,7 +187,8 @@
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  margin-bottom: 1.25rem;
+  max-width: 900px;
+  width: 100%;
 }
 
 .candidate-page-num {

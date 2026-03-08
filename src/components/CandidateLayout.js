@@ -153,11 +153,13 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
       </header>
       <main className={`candidate-main ${title ? 'candidate-main-with-header' : 'candidate-main-centered'}`}>
         {title && (
-          <div className="candidate-page-header">
-            <span className="candidate-page-num">{String(activeStep).padStart(2, '0')}</span>
-            <div>
-              <h1 className="candidate-page-title">{title}</h1>
-              {subtitle && <p className="candidate-page-subtitle">{subtitle}</p>}
+          <div className="candidate-header-wrapper">
+            <div className="candidate-page-header">
+              <span className="candidate-page-num">{String(activeStep).padStart(2, '0')}</span>
+              <div>
+                <h1 className="candidate-page-title">{title}</h1>
+                {subtitle && <p className="candidate-page-subtitle">{subtitle}</p>}
+              </div>
             </div>
           </div>
         )}
