@@ -16,6 +16,7 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [application, setApplication] = useState(null);
   const dropdownRef = useRef(null);
 
@@ -46,13 +47,20 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
     }
   }, [showDropdown]);
 
-  const handleLogout = () => {
+  const confirmLogout = () => {
     logout();
     navigate('/login');
     setShowDropdown(false);
+    setShowLogoutModal(false);
   };
 
-  const handleCandidateClick = () => {
+  const handleLogoutClick = () => {
+    setShowLogoutModal(true);
+    setShowDropdown(false);
+  };
+
+  const handleCandidateClick = (e) => {
+    e.stopPropagation();
     if (user?.role === 'candidate') {
       setShowDropdown(!showDropdown);
     }
@@ -64,6 +72,30 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
 
   return (
     <div className="candidate-layout">
+      {showLogoutModal && (
+        <div className="candidate-modal-overlay" onClick={() => setShowLogoutModal(false)}>
+          <div className="candidate-modal" onClick={(e) => e.stopPropagation()}>
+            <h3 className="candidate-modal-title">Confirm Logout</h3>
+            <p className="candidate-modal-message">Are you sure you want to logout?</p>
+            <div className="candidate-modal-actions">
+              <button 
+                type="button"
+                className="candidate-modal-btn candidate-modal-btn-cancel" 
+                onClick={() => setShowLogoutModal(false)}
+              >
+                No
+              </button>
+              <button 
+                type="button"
+                className="candidate-modal-btn candidate-modal-btn-confirm" 
+                onClick={confirmLogout}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <header className="candidate-topbar">
         <Link to="/" className="candidate-brand">Prayas</Link>
         <nav className="candidate-flow">
@@ -71,8 +103,12 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
           <div className="candidate-flow-steps">
             {CANDIDATE_STEPS.map((s) => {
               // Show "Logout" instead of "Login / Register" when logged in
-              const label = s.num === 1 && user?.role === 'candidate' ? 'Logout' : s.label;
-              const handleClick = s.num === 1 && user?.role === 'candidate' ? (e) => { e.preventDefault(); handleLogout(); } : undefined;
+              const isLogout = s.num === 1 && user?.role === 'candidate';
+              const label = isLogout ? 'Logout' : s.label;
+              const handleClick = isLogout ? (e) => { 
+                e.preventDefault(); 
+                handleLogoutClick(); 
+              } : undefined;
               return (
                 <Link
                   key={s.num}
@@ -92,7 +128,7 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
               <div 
                 className="candidate-badge" 
                 onClick={handleCandidateClick} 
-                onKeyDown={(e) => e.key === 'Enter' && handleCandidateClick()} 
+                onKeyDown={(e) => e.key === 'Enter' && handleCandidateClick(e)} 
                 role="button" 
                 tabIndex={0}
               >
@@ -108,7 +144,7 @@ export default function CandidateLayout({ children, activeStep = 1, title, subti
                   <button 
                     type="button"
                     className="candidate-dropdown-logout" 
-                    onClick={handleLogout}
+                    onClick={handleLogoutClick}
                   >
                     Logout
                   </button>
